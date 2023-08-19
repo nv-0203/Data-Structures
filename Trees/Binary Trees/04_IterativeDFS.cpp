@@ -1,4 +1,3 @@
-#include <bits/stdc++.h>
 #include <iostream>
 #include <string>
 #include <map>
@@ -115,7 +114,6 @@ void iterative_postorder2(Node *root)   //using 2 stacks
         cout<<(stk2.top()->key)<<" ";
         stk2.pop();
     }
-    
 }
 
 void iterative_postorder1(Node *root)   //using 1 stack
@@ -157,10 +155,12 @@ void all_in_one(Node *root)
 {
     if (root == NULL)
         return;
-    Node *curr = root;
+    
     stack<pair<Node*, int>> stk;
     stk.push({root, 1});
+
     vector<int> preorder, inorder, postorder;
+    
     while (!stk.empty())
     {
         auto it = stk.top();
@@ -191,8 +191,6 @@ void all_in_one(Node *root)
         {
             postorder.push_back(it.first->key);
         }
-
-
     }
 
     cout<<"Preorder: ";
@@ -227,13 +225,15 @@ int main()
     root -> right -> left = new Node(6);
     root -> right -> left -> right = new Node(7);
     root -> right -> left -> right -> right = new Node(8);
-
+    cout<<"Peorder: "<<endl;
     iterative_preorder(root);
     cout << endl;
     iterative_preorder1(root);
     cout << endl;
+    cout<<"Inorder: "<<endl;
     iterative_inorder(root);
     cout<<endl;
+    cout<<"Postorder: "<<endl;
     iterative_postorder2(root);
     cout<<endl;
     iterative_postorder2(root);

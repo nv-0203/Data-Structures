@@ -1,4 +1,3 @@
-#include <bits/stdc++.h>
 #include <iostream>
 #include <string>
 #include <map>
@@ -51,7 +50,7 @@ bool checkBalanaced(Node *root) //naive solution
     if (left==false || right==false)
         return false;
 
-    return checkBalanaced(root);
+    return true;
 }
 
 //improvised sol for check of balanced tree
@@ -63,9 +62,9 @@ int ht(Node *root)
     int lh = ht(root -> left);
     int rh = ht (root -> right);
 
-    if (lh == -1 || rh==-1)
+    if (lh == -1 || rh==-1)     //this returns -1 if diff was found to be -1 in the prv step
         return -1;
-    if ( abs (lh - rh) > 1)
+    if ( abs (lh - rh) > 1)     //if the difference between left height and right height > 1    return -1 directly by above statement
         return -1;
 
     return max(lh, rh) + 1;
@@ -75,8 +74,7 @@ bool check (Node *root)
 {
     if (ht(root)==-1)
         return false;
-    else
-        return true;
+    return true;
 }
 
 int main()

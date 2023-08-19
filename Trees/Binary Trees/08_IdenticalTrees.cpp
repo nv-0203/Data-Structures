@@ -1,4 +1,3 @@
-#include <bits/stdc++.h>
 #include <iostream>
 #include <string>
 #include <map>
@@ -28,6 +27,9 @@ bool checkidentical(Node *node1, Node *node2)
 {
     if (node1==NULL || node2==NULL)
         return (node1==node2);
+    
+    if (node1->key != node2->key)
+        return false;
     
     bool left = checkidentical(node1->left, node2->left);
     bool right = checkidentical(node1->right, node2->right);

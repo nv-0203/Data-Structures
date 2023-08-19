@@ -1,4 +1,3 @@
-#include <bits/stdc++.h>
 #include <iostream>
 #include <string>
 #include <map>
@@ -74,7 +73,9 @@ void boundarytraversal(Node *root)
     if (root == NULL)
         return;
     vector<int> ans;
-    ans.push_back(root->key);
+    if (!isLeaf(root))
+        ans.push_back(root->key);
+        
     addLeftBoundary(root, ans);
     addLeaves(root, ans);
     addRightBoundary(root, ans);

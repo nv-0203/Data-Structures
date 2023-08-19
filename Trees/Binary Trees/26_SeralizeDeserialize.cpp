@@ -1,4 +1,3 @@
-#include <bits/stdc++.h>
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -55,76 +54,68 @@ void BFS(Node *root)
 //task: create a function "serialize" to convert a node 'root' into a string 'str; 
 // create another function "de-serialize" that takes in 'str' and converts it back to 'root'
 
-string serialize(Node *root)
+string serialize(Node* root) 
 {
-    string ans;
+    string s;
     queue<Node*> que;
     que.push(root);
+    while (!que.empty())
+    {
+        Node *node = que.front();
+        que.pop();
+        if (node)
+        {
+            s += to_string(node->key);
+            que.push(node->left);
+            que.push(node->right);
+        }
+        else
+            s.push_back('N');
+        s.push_back(',');
+    }
+    return s;
+}
+
+// Decodes your encoded data to tree.
+Node* deserialize(string s) 
+{
+    Node *root;
+
+    stringstream ss(s);
+    string token;
+
+    getline(ss, token, ',');
+    if (token == "N")
+        return NULL;
+    root = new Node(stoi(token));
+
+    queue<Node*> que;
+    que.push(root);
+
     while (!que.empty())
     {
         Node *curr = que.front();
         que.pop();
 
-        if (curr == NULL)
-            ans.append("#,");
-        else
+        if (getline(ss, token, ','))
         {
-            ans.append(to_string(curr->key)+',');
-            que.push(curr->left);
-            que.push(curr->right);
+            if (token != "N")
+            {
+                curr->left = new Node(stoi(token));
+                que.push(curr->left);
+            }
+        }
+
+        if (getline(ss, token, ','))
+        {
+            if (token != "N")
+            {
+                curr->right = new Node(stoi(token));
+                que.push(curr->right);
+            }
         }
     }
-    return ans;
-}
 
-
-Node *deserialize(string s)
-{
-    if (s.size()==0)
-        return NULL;
-    queue<Node*> que;
-
-    stringstream ss(s);
-    string first;
-    getline(ss, first, ',');
-
-    Node *root = new Node(stoi(first));
-    que.push(root);
-
-    int i=0;
-
-    while (!que.empty())
-    {
-        if (s[i]==',')
-            continue;
-
-        Node *top = que.front();
-        que.pop();
-
-        string temp;
-        getline (ss, temp, ',');
-        
-        Node *leftNode;
-        if (temp != "#")
-        {
-            leftNode = new Node(stoi(temp));
-            que.push(leftNode);
-        }
-        else
-            leftNode = NULL;
-        top -> left = leftNode;
-
-        getline(ss, temp, ',');
-        Node *rightNode;
-        if (temp != "#")
-        {
-            rightNode = new Node(stoi(temp));
-            que.push(rightNode);
-        }
-        else
-            rightNode = NULL;
-        top -> right = rightNode;
-    }
     return root;
 }
 

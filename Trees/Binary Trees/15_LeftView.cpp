@@ -1,4 +1,3 @@
-#include <bits/stdc++.h>
 #include <iostream>
 #include <string>
 #include <map>
@@ -9,6 +8,7 @@
 #include <queue>
 #include <stack>
 #include <set>
+#include <algorithm>
 using namespace std;
 typedef long long int ll;
 
@@ -48,9 +48,9 @@ void left_view(Node *root)
         que.pop();
 
         Node *curr = it.first;
-        int x = it.second;
+        int x = it.second;  //get level from the queue
 
-        if (mp.find(x) == mp.end())
+        if (mp.find(x) == mp.end()) //if no other node for that level then add in map
             mp[x]=(curr->key);
 
         if (curr->left != NULL)

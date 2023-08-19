@@ -21,7 +21,7 @@ using namespace std;
 
 vector<int> set_dijkstra(int V, vector<pair<int, int>> adj[], int S)   //using set
 {
-    set<pair<int, int>> st;
+    set<pair<int, int>> st; //{distance to node x, node x}
     vector<int> dist(V, 1e9);
     dist[S] = 0;
     st.insert({0, S});
@@ -69,7 +69,7 @@ vector<int> dijkstra(int V, vector<pair<int, int>> adj[], int S)   //using prior
         {
             int v = it.first;
             int w = it.second;
-            if (dis + w < distTo[v])
+            if (distTo[v] > dis + w)
             {
                 distTo[v] = dis + w;
                 pq.push({dis + w, v});

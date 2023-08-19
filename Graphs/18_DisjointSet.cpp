@@ -65,7 +65,7 @@ class DisjointSet
         else
         {
             parent[ulp_v] = ulp_u;  //can go both ways i.e parent[ulp_u] = ulp_v also is fine
-            rank[ulp_v]++;
+            rank[ulp_u]++;
         }
     }
 
@@ -73,6 +73,9 @@ class DisjointSet
     {
         int ulp_u = findUParent(u);
         int ulp_v = findUParent(v);
+
+        if (ulp_u == ulp_v)
+            return;
 
         if (size[ulp_u] < size[ulp_v])  //here it can be equal to as well doesn't make a difference
         {
@@ -112,30 +115,30 @@ int main()
 
 /* For-use:
 
-class DisjointSet
+class DSU
 {
-    vector<int> rank, parent;
     public:
-
-    DisjointSet(int n)
+    vector<int> rank, parent;
+    DSU(int n)
     {
-        rank.resize(n+1, 0);    
-        parent.resize(n+1, 0);
-        for (int i=0; i<=n; i++)
+        rank.resize(n, 0);    
+        parent.resize(n, 0);
+        for (int i=0; i<n; i++)
             parent[i] = i;      
+    }
 
-    int findUParent(int node)   
+    int findPar(int node)   
     {
         if (parent[node] == node)   
             return node;
 
-        return parent[node] = findUParent(parent[node]);    
+        return parent[node] = findPar(parent[node]);    
     }
 
-    void Union(int u, int v)
+    void UnionByRank(int u, int v)
     {
-        int ulp_u = findUParent(u);  
-        int ulp_v = findUParent(v);  
+        int ulp_u = findPar(u);  
+        int ulp_v = findPar(v);  
 
         if (ulp_u == ulp_v)     
             return;
@@ -149,8 +152,29 @@ class DisjointSet
         else
         {
             parent[ulp_v] = ulp_u;  
-            rank[ulp_v]++;
+            rank[ulp_u]++;
         }
+    }
+
+    void UnionBySize(int u, int v)
+    {
+        int ulp_u = findPar(u);
+        int ulp_v = findPar(v);
+
+        if (ulp_u == ulp_v)
+            return;
+
+        if (size[ulp_u] < size[ulp_v])
+        {
+            parent[ulp_u] = ulp_v;
+            size[ulp_v] += size[ulp_u];
+        }
+        else
+        {
+            parent[ulp_v] = ulp_u;
+            size[ulp_u] += size[ulp_v];
+        }
+        
     }
 };
 
