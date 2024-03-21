@@ -118,13 +118,14 @@ int main()
 class DSU
 {
     public:
-    vector<int> rank, parent;
+    vector<int> rank, parent, size;
     DSU(int n)
     {
         rank.resize(n, 0);    
         parent.resize(n, 0);
         for (int i=0; i<n; i++)
-            parent[i] = i;      
+            parent[i] = i;   
+        size.resize(n, 1);   
     }
 
     int findPar(int node)   
