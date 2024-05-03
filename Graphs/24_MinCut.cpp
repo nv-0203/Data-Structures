@@ -43,9 +43,6 @@ void minCut(vector<vector<int>> &graph, int n, int s, int t)
     int u, v;
 
     vector<vector<int>> rGraph = graph; // Residual Graph
-    for (u = 0; u < n; u++)
-        for (v = 0; v < n; v++)
-            rGraph[u][v] = graph[u][v];
 
     vector<int> parent(n);
 
@@ -117,3 +114,5 @@ Algorithm:
 3. All edges which are from a reachable vertex to a non-reachable vertex are minimum cut
      edges. Print all such edges.
 */
+
+//Note: The value of min_cut will be equal to the value of max_flow

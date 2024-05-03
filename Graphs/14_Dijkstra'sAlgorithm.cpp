@@ -1,20 +1,7 @@
-#include <iostream>
-#include <vector>
-#include <string.h>
-#include <map>
-#include <stack>
-#include <queue>
-#include <deque>
-#include <unordered_map>
-#include <set>
-#include <unordered_set>
-#include <iomanip>
-#include <math.h>
-#include <algorithm>
-#include <iomanip>
+#include <bits/stdc++.h>
 using namespace std;
 
-//Single sourxe shortest path
+//Single source shortest path
 
 // Function to find the shortest distance of all the vertices
 // from the source vertex S.
@@ -54,7 +41,7 @@ vector<int> set_dijkstra(int V, vector<pair<int, int>> adj[], int S)   //using s
 vector<int> dijkstra(int V, vector<pair<int, int>> adj[], int S)   //using priority queue
 {
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-    vector<int> distTo(V, INT_MAX);
+    vector<int> distTo(V, 1e9);
 
     distTo[S] = 0;
     pq.push({0, S});    //{distance to node x, node x}

@@ -55,9 +55,7 @@ void spanningTree(int V, vector<vector<int>> adj[])
             int edgeWt = it[1];
 
             if (!vis[adjNode])
-            {
                 pq.push({edgeWt, adjNode, node});
-            }
         }
     }
 
@@ -65,9 +63,7 @@ void spanningTree(int V, vector<vector<int>> adj[])
     {
         cout<<i<<" : ";
         for (auto x : MST[i])
-        {
             cout<<x<<" ";
-        }
         cout<<endl;
     }
     cout<<"Sum : "<<sum<<endl;

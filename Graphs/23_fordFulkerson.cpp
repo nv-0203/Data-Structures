@@ -20,13 +20,11 @@ bool bfs(vector<vector<int>> &rGraph, int n, int s, int t, vector<int> &parent)
 		{
 			if (vis[v] == false && rGraph[u][v] > 0)
 			{
-				if (v == t)
-				{
-					parent[v] = u;
-					return true;
-				}
-				q.push(v);
 				parent[v] = u;
+				if (v == t)
+					return true;
+				
+				q.push(v);
 				vis[v] = true;
 			}
 		}
@@ -38,25 +36,21 @@ bool bfs(vector<vector<int>> &rGraph, int n, int s, int t, vector<int> &parent)
 int fordFulkerson(vector<vector<int>> &graph, int n, int s, int t)
 {
 	vector<vector<int>> rGraph = graph;	//Residual graph
-	
-	for (int u = 0; u < n; u++)
-		for (int v = 0; v < n; v++)
-			rGraph[u][v] = graph[u][v];
 
 	vector<int> parent(n);
 
 	int max_flow = 0;
 
-	while (bfs(rGraph, n, s, t, parent))
+	while (bfs(rGraph, n, s, t, parent))	//finding augmented path
 	{
 		int path_flow = INT_MAX;
 		for (int v = t; v != s; v = parent[v])
 		{
 			int u = parent[v];
-			path_flow = min(path_flow, rGraph[u][v]);
+			path_flow = min(path_flow, rGraph[u][v]);	//bottleneck capacity
 		}
 
-		for (int v = t; v != s; v = parent[v])
+		for (int v = t; v != s; v = parent[v])	//augmenting the path
 		{
 			int u = parent[v];
 			rGraph[u][v] -= path_flow;

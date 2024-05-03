@@ -83,7 +83,15 @@ vector<int> KMP(string txt, string pat)
         }
 
         if (j == m)
+        {
             ans.push_back(i-j);
+            /* To find non-overlapping pat in txt:
+            j = 0;
+            if (i != n)
+                i--;
+            */
+        }
+            
 
         /*
         1. txt is still left
